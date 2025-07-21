@@ -1,0 +1,33 @@
+main:
+  components_repository: components
+  project_name: nyc_airbnb
+  experiment_name: development
+  steps: train_random_forest
+  modeling: ${modeling}
+etl:
+  sample: sample1.csv
+  cleaning_input_artifact: sample.csv:latest
+  cleaning_output_artifact: clean_sample.csv
+  cleaning_output_type: cleaned_data
+  cleaning_output_description: Cleaned_data_with_outliers_removed
+  min_price: 10
+  max_price: 350
+data_check:
+  kl_threshold: 0.2
+  min_price: 10
+  max_price: 350
+modeling:
+    test_size: 0.2
+    val_size: 0.2
+    random_seed: 42
+    stratify_by: neighbourhood_group
+    max_tfidf_features: 5
+    random_forest:  
+        n_estimators: 100
+        max_depth: 15
+        min_samples_split: 4
+        min_samples_leaf: 3
+        n_jobs: -1
+        criterion: squared_error
+        max_features: 0.5
+        oob_score: true

@@ -35,20 +35,27 @@ def go(args):
     )
 
     # Save to output files
+
+    import os
+    
+
+    safe_tmp_dir = os.path.join(os.getcwd(), "temp_files")
+    os.makedirs(safe_tmp_dir, exist_ok=True)
+
     for df, k in zip([trainval, test], ['trainval', 'test']):
         logger.info(f"Uploading {k}_data.csv dataset")
-        with tempfile.NamedTemporaryFile("w") as fp:
-
-            df.to_csv(fp.name, index=False)
-
-            log_artifact(
-                f"{k}_data.csv",
-                f"{k}_data",
-                f"{k} split of dataset",
-                fp.name,
-                run,
-            )
-
+    
+        temp_path = os.path.join(safe_tmp_dir, f"{k}_data.csv")
+        df.to_csv(temp_path, index=False)
+        
+        log_artifact(
+            f"{k}_data.csv",
+            f"{k}_data",
+            f"{k} split of dataset",
+            temp_path,
+            run,
+        )
+            
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Split test and remainder")
