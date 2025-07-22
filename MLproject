@@ -6,4 +6,4 @@ entry_points:
     parameters:
       hydra_options: {type: str, default: ""}
     command: >
-      python main.py ${hydra_options}
+      python main.py etl.sample=${etl.sample}
