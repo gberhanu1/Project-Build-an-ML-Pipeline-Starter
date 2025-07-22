@@ -4,6 +4,6 @@ conda_env: conda.yml
 entry_points:
   main:
     parameters:
-      hydra_options: {type: str, default: ""}
+      sample: {type: str, default: sample1.csv}
     command: >
-      python main.py etl.sample=${etl.sample}
+      python main.py etl.sample=${sample}
