@@ -4,14 +4,8 @@ conda_env: conda.yml
 entry_points:
   main:
     parameters:
-      steps:
-        description: Comma-separated list of steps to execute (useful for debugging)
+      hydra_options:
         type: str
-        default: all
-      etl.sample:
-        description: Sample file name
-        type: str
-        default: sample1.csv
-
+        default: ""
     command: >
-      python src/main.py hydra.run.dir=. hydra.output_subdir=null etl.sample=${etl.sample} steps=${steps}
+      python src/main.py ${hydra_options}
