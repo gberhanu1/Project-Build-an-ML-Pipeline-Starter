@@ -8,11 +8,10 @@ entry_points:
         description: Comma-separated list of steps to execute (useful for debugging)
         type: str
         default: all
-
-      hydra_options:
-        description: Other configuration parameters to override
+      etl.sample:
+        description: Sample file name
         type: str
-        default: ''
+        default: sample1.csv
 
     command: >
-      python main.py main.steps={steps} 
+      python src/main.py hydra.run.dir=. hydra.output_subdir=null etl.sample=${etl.sample} steps=${steps}
