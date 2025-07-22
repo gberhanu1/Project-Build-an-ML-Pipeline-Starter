@@ -4,8 +4,6 @@ conda_env: conda.yml
 entry_points:
   main:
     parameters:
-      hydra_options:
-        type: str
-        default: ""
+      hydra_options: {type: str, default: ""}
     command: >
       python main.py ${hydra_options}
